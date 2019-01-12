@@ -11,30 +11,13 @@ keep_playing = True
 
 while keep_playing == True:
 
-	print("Welcome to the best command line game ever!")
-	print("You're about to play for a prize of absolutely nothing.")
-	print("You need to choose between door number 1, 2, or 3.")
-	print("Only one of the doors contain a prize")
-	chosen_door = input("Which door would you like to choose?  ")
+	print_intro()
 
-	CheckChoice(chosen_door)
+	doors[] = pick_and_check()
 
-	choice_valid = False
-	while choice_valid == False:
-		if (int(chosen_door) < 1 or int(chosen_door) > 3):
-			chosen_door = input("Invalid choice. This isn't rocket surgery. Pick 1, 2, or 3: ")
-		else:
-			choice_valid = True
 
-	win_door = random.randint(1,3)
-	fake_door = win_door
-	if win_door == chosen_door:
-		while fake_door == win_door:
-			fake_door = random.randint(1,3)
-	else:
-		fake_door = 6 - chosen_door - win_door
 
-	print("win: " + win_door + " chosen: " + chosen_door + " fake: " + fake_door)
+	#print("win: " + win_door + " chosen: " + chosen_door + " fake: " + fake_door)
 
 
 	did_we_win = False
@@ -115,18 +98,66 @@ while keep_playing == True:
 			outcomes.append(0)
 			did_we_win = False
 
-	print("Outset was...Winning door: " + str(win_door) +
+	print("Result was...Winning door: " + str(win_door) +
 	" | Chosen door: " + str(chosen_door) +
 	" | Did we win: " + str(did_we_win))
 
-#print(str(outcomes[0]))
 
-total = 0
-for x in range(0, iterations):
-	#print("outcomes value: " + str(int(outcomes[x])))
-	total += int(outcomes[x])
-	#print("total value: " + str(total))
+	keep_playing = keep_playing_question()
+	if not keep_playing:
+		print_statistics()
 
-average_win = total / iterations * 100
-print("\nTotal wins: " + str(total) + " out of " + str(iterations))
-print ("We won " + str(average_win) + "% of the time.")
+	print("Thanks for playing! kbai!")
+
+
+def print_statistics():
+	total = 0
+	for x in range(0, iterations):
+		#print("outcomes value: " + str(int(outcomes[x])))
+		total += int(outcomes[x])
+		#print("total value: " + str(total))
+
+	average_win = total / iterations * 100
+	print("\nTotal wins: " + str(total) + " out of " + str(iterations))
+	print ("You won " + str(average_win) + "% of the time.")
+
+
+def print_intro():
+	print("Welcome to the best command line game ever!")
+	print("You're about to play for a prize of absolutely nothing.")
+	print("You need to choose between door number 1, 2, or 3.")
+	print("Only one of the doors contain a prize")
+
+def pick_and_check():
+	chosen_door = input("Which door would you like to choose?  ")
+	choice_valid = False
+	while choice_valid == False:
+		if (int(chosen_door) < 1 or int(chosen_door) > 3):
+			chosen_door = input("Invalid choice. This isn't rocket surgery. Pick 1, 2, or 3: ")
+		else:
+			choice_valid = True
+
+	win_door = random.randint(1,3)
+	fake_door = win_door
+	if win_door == chosen_door:
+		while fake_door == win_door:
+			fake_door = random.randint(1,3)
+	else:
+		fake_door = 6 - chosen_door - win_door
+
+	#return doors?
+
+def keep_playing_question():
+	check = False
+	kp = True
+	while check == False:
+		kp = input("Do you want to keep playing? (yes/no): ")
+		if(kp == "yes" or kp == "y"):
+			kp = True
+			check = True
+		elif(kp == "no" or kp == "n"):
+			kp = False
+			check = True
+		else:
+			print("Not a valid choice.")
+	return y
