@@ -1,26 +1,18 @@
 from __future__ import division
 import random
 
-#################
 #GLOBAL VARIABLES
-#################
 outcomes = []
 keep_playing = True
 
-##########
-#FUNCTIONS
-##########
-
 #Sum it all up, print some info on the outcomes
 def print_statistics():
-	total = 0
-	for x in range(0, ):
-		#print("outcomes value: " + str(int(outcomes[x])))
-		total += int(outcomes[x])
-		#print("total value: " + str(total))
-
-	average_win = total / iterations * 100
-	print("\nTotal wins: " + str(total) + " out of " + str(iterations))
+	totalwins = 0
+	for x in outcomes:
+		totalwins = totalwins + x
+	iterations = len(outcomes)
+	average_win = totalwins / iterations * 100
+	print("\nTotal wins: " + str(totalwins) + " out of " + str(iterations))
 	print ("You won " + str(average_win) + "% of the time.")
 
 #Let the player pick the door and check if choice is valid
@@ -94,35 +86,19 @@ while keep_playing == True:
 	else:
 		fake_door = 6 - int(chosen_door) - int(win_door)
 
-	#doors = [chosen_door, win_door, fake_door]
-	#print(doors)
-
-	did_we_win = False
-
 	print("\nDoor number " +str(chosen_door) + ", fantastic choice, and I'll " \
 	+ "show you that nothing is behind door number " + str(fake_door))
 
 	CHOOSE_TO_SWITCH = switch_or_stay_check()
-
-
 	if(CHOOSE_TO_SWITCH):
-		if(win_door == chosen_door):
-			did_we_win = False
-		else:
-			did_we_win = True
+		chosen_door = 6 - int(chosen_door) - int(fake_door)
 
-		#print("Switched doors. Chosen door: " + str(new_chosen_door) + \
-		#" Win door: " + str(new_win_door))
-
-	elif (not CHOOSE_TO_SWITCH):
-		if(win_door == chosen_door):
-			did_we_win = True
-		else:
-			did_we_win = False
-
-	if (did_we_win):
+	did_we_win = False
+	if(win_door == chosen_door):
+		did_we_win = True
 		outcomes.append(1)
 	else:
+		did_we_win = False
 		outcomes.append(0)
 
 	print("\nRESULTS:\n" +
