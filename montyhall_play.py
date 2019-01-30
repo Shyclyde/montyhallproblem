@@ -28,18 +28,24 @@ def pick_and_check():
 	chosen_door = input("Which door would you like to choose?: ")
 	choice_valid = False
 	while choice_valid == False:
-		if (int(chosen_door) < 1 or int(chosen_door) > 3):
-			chosen_door = input("Invalid choice. This isn't rocket surgery. Pick 1, 2, or 3: ")
+		if (chosen_door == "1" or chosen_door == "2" or chosen_door == "3"):
+			chosen_door = int(chosen_door)
+			if (int(chosen_door) < 1 or int(chosen_door) > 3):
+				chosen_door = input("Invalid choice. This isn't rocket surgery. Pick 1, 2, or 3: ")
+			else:
+				choice_valid = True
 		else:
-			choice_valid = True
+			chosen_door = input("Invalid choice. This isn't rocket surgery. Pick 1, 2, or 3: ")
 	chosen_door = int(chosen_door)
 	return chosen_door
 
 #Let the player pick the door and check if choice is valid
 def switch_or_stay_check():
+	print("got here")
 	switch = input("Now, since you chose door number " + str(chosen_door) + ", and you know door number " \
 	+ str(fake_door) + " is bad, do you want to stay with door " + str(chosen_door) \
 	+ " or switch to door number " + str(6 - chosen_door - fake_door) + "? (switch / stay): ")
+	print("got here")
 	choice_valid = False
 	while choice_valid == False:
 		if (switch != "switch" and switch != "stay"):
@@ -172,9 +178,9 @@ while keep_playing == True:
 	" | Chosen door: " + str(chosen_door) +
 	" | Did we win: " + str(did_we_win) + "\n")
 
-
 	keep_playing = keep_playing_question()
+	print("\n\n")
 	if not keep_playing:
 		print_statistics()
-
-	print("Thanks for playing! kbai!")
+	else:
+		print("Thanks for playing! kbai!")
