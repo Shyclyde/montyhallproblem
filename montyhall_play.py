@@ -8,9 +8,9 @@ keep_playing = True
 #Sum it all up, print some info on the outcomes
 def print_statistics():
 	totalwins = 0
+	iterations = len(outcomes)
 	for x in outcomes:
 		totalwins = totalwins + x
-	iterations = len(outcomes)
 	average_win = totalwins / iterations * 100
 	print("\nTotal wins: " + str(totalwins) + " out of " + str(iterations))
 	print ("You won " + str(average_win) + "% of the time.")
