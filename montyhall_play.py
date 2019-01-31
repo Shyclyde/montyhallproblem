@@ -8,11 +8,10 @@ keep_playing = True
 #Sum it all up, print some info on the outcomes
 def print_statistics():
 	totalwins = 0
-	iterations = len(outcomes)
 	for x in outcomes:
 		totalwins = totalwins + x
-	average_win = totalwins / iterations * 100
-	print("\nTotal wins: " + str(totalwins) + " out of " + str(iterations))
+	average_win = totalwins / len(outcomes) * 100
+	print("\nTotal wins: " + str(totalwins) + " out of " + str(len(outcomes)))
 	print ("You won " + str(average_win) + "% of the time.")
 
 #let the player pick the door and check if choice is valid
@@ -28,8 +27,7 @@ def pick_and_check():
 				choice_valid = True
 		else:
 			chosen_door = input("Invalid choice. Pick 1, 2, or 3: ")
-	chosen_door = int(chosen_door)
-	return chosen_door
+	return int(chosen_door)
 
 #let the player pick the door and check if choice is valid
 def switch_or_stay_check():
@@ -47,7 +45,7 @@ def switch_or_stay_check():
 	else:
 		return False
 
-#end game, see if we should continue and check choice, return boolean yes/no
+#end game, see if we should continue and check choice, return boolean
 def keep_playing_question():
 	check = False
 	kp = True
@@ -63,7 +61,7 @@ def keep_playing_question():
 			print("Not a valid choice.")
 	return kp
 
-#get results of choice and if it matches winning door, return if we won or not
+#get results of choice and if it matches winning door, return boolean if we won or not
 def run(chosen_door, fake_door, win_door):
 	CHOOSE_TO_SWITCH = switch_or_stay_check()
 	if(CHOOSE_TO_SWITCH):
@@ -78,7 +76,7 @@ def run(chosen_door, fake_door, win_door):
 		outcomes.append(0)
 	return did_we_win
 
-#Just print out the startup message
+#print out the startup message
 def print_intro():
 	print("\nWelcome to the Monty Hall problem.\n")
 	print("Choose a door: 1, 2, or 3.")
