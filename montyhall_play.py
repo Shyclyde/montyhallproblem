@@ -15,7 +15,7 @@ def print_statistics():
 	print("\nTotal wins: " + str(totalwins) + " out of " + str(iterations))
 	print ("You won " + str(average_win) + "% of the time.")
 
-#Let the player pick the door and check if choice is valid
+#let the player pick the door and check if choice is valid
 def pick_and_check():
 	chosen_door = input("Which door would you like to choose?: ")
 	choice_valid = False
@@ -31,10 +31,10 @@ def pick_and_check():
 	chosen_door = int(chosen_door)
 	return chosen_door
 
-#Let the player pick the door and check if choice is valid
+#let the player pick the door and check if choice is valid
 def switch_or_stay_check():
-	switch = input("Now, since you chose door number " + str(chosen_door) + ", and you know door number " \
-	+ str(fake_door) + " is bad, do you want to stay with door " + str(chosen_door) \
+	switch = input("\nNow, since you chose door number " + str(chosen_door) + "...\nand you know door number " \
+	+ str(fake_door) + " is bad...\ndo you want to stay with door " + str(chosen_door) \
 	+ " or switch to door number " + str(6 - chosen_door - fake_door) + "? (switch / stay): ")
 	choice_valid = False
 	while choice_valid == False:
@@ -47,7 +47,7 @@ def switch_or_stay_check():
 	else:
 		return False
 
-#End game, see if we should continue and check choice, return boolean yes/no
+#end game, see if we should continue and check choice, return boolean yes/no
 def keep_playing_question():
 	check = False
 	kp = True
@@ -63,14 +63,42 @@ def keep_playing_question():
 			print("Not a valid choice.")
 	return kp
 
+#get results of choice and if it matches winning door, return if we won or not
+def run(chosen_door, fake_door, win_door):
+	CHOOSE_TO_SWITCH = switch_or_stay_check()
+	if(CHOOSE_TO_SWITCH):
+		chosen_door = 6 - int(chosen_door) - int(fake_door)
+
+	did_we_win = False
+	if(win_door == chosen_door):
+		did_we_win = True
+		outcomes.append(1)
+	else:
+		did_we_win = False
+		outcomes.append(0)
+	return did_we_win
+
 #Just print out the startup message
 def print_intro():
 	print("\nWelcome to the Monty Hall problem.\n")
 	print("Choose a door: 1, 2, or 3.")
 	print("Only one of the doors contain a prize")
 
+#print the choices we chose and fake door
+def choice_print(chosen_door, fake_door):
+	print("\nDoor number " +str(chosen_door) + ", a fantastic choice, and I'll " \
+	+ "show you that nothing is behind door number " + str(fake_door))
 
-#main loop
+#print out the results
+def print_results(chosen_door, fake_door, win_door):
+	print("\nRESULTS:\n" +
+	"\nWinning door: " + str(win_door) +
+	"\nChosen door: " + str(chosen_door) +
+	"\nDid we win: " + str(did_we_win) + "\n")
+
+##########
+#MAIN LOOP
+##########
 while keep_playing == True:
 
 	print_intro()
@@ -86,25 +114,11 @@ while keep_playing == True:
 	else:
 		fake_door = 6 - int(chosen_door) - int(win_door)
 
-	print("\nDoor number " +str(chosen_door) + ", a fantastic choice, and I'll " \
-	+ "show you that nothing is behind door number " + str(fake_door))
+	choice_print(chosen_door, fake_door)
 
-	CHOOSE_TO_SWITCH = switch_or_stay_check()
-	if(CHOOSE_TO_SWITCH):
-		chosen_door = 6 - int(chosen_door) - int(fake_door)
+	did_we_win = run(chosen_door, fake_door, win_door)
 
-	did_we_win = False
-	if(win_door == chosen_door):
-		did_we_win = True
-		outcomes.append(1)
-	else:
-		did_we_win = False
-		outcomes.append(0)
-
-	print("\nRESULTS:\n" +
-	"\nWinning door: " + str(win_door) +
-	"\nChosen door: " + str(chosen_door) +
-	"\nDid we win: " + str(did_we_win) + "\n")
+	print_results(chosen_door, fake_door, win_door)	
 
 	keep_playing = keep_playing_question()
 	if (not keep_playing):
