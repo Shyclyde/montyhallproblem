@@ -23,11 +23,11 @@ def pick_and_check():
 		if (chosen_door == "1" or chosen_door == "2" or chosen_door == "3"):
 			chosen_door = int(chosen_door)
 			if (int(chosen_door) < 1 or int(chosen_door) > 3):
-				chosen_door = input("Invalid choice. This isn't rocket surgery. Pick 1, 2, or 3: ")
+				chosen_door = input("Invalid choice. Pick 1, 2, or 3: ")
 			else:
 				choice_valid = True
 		else:
-			chosen_door = input("Invalid choice. This isn't rocket surgery. Pick 1, 2, or 3: ")
+			chosen_door = input("Invalid choice. Pick 1, 2, or 3: ")
 	chosen_door = int(chosen_door)
 	return chosen_door
 
@@ -39,7 +39,7 @@ def switch_or_stay_check():
 	choice_valid = False
 	while choice_valid == False:
 		if (switch != "switch" and switch != "stay"):
-			switch = input("Invalid choice. This isn't rocket surgery. Pick switch or stay: ")
+			switch = input("Invalid choice. Pick switch or stay: ")
 		else:
 			choice_valid = True
 	if switch == "switch":
@@ -86,7 +86,7 @@ while keep_playing == True:
 	else:
 		fake_door = 6 - int(chosen_door) - int(win_door)
 
-	print("\nDoor number " +str(chosen_door) + ", fantastic choice, and I'll " \
+	print("\nDoor number " +str(chosen_door) + ", a fantastic choice, and I'll " \
 	+ "show you that nothing is behind door number " + str(fake_door))
 
 	CHOOSE_TO_SWITCH = switch_or_stay_check()
