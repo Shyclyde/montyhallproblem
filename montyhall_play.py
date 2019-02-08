@@ -31,9 +31,11 @@ def pick_and_check():
 
 #let the player pick the door and check if choice is valid
 def switch_or_stay_check():
-	switch = input("\nNow, since you chose door number " + str(chosen_door) + "...\nand you know door number " \
-	+ str(fake_door) + " is bad...\ndo you want to stay with door " + str(chosen_door) \
-	+ " or switch to door number " + str(6 - chosen_door - fake_door) + "? (switch / stay): ")
+	switch = input("\nNow, since you chose door number " + str(chosen_door) + "...\n"
+	+ "And you know door number " + str(fake_door) + " is bad...\n"
+	+ "Do you want to stay with door " + str(chosen_door) + " or switch to door number "
+	+ str(6 - chosen_door - fake_door) + "? (switch / stay): ")
+
 	choice_valid = False
 	while choice_valid == False:
 		if (switch != "switch" and switch != "stay"):
@@ -94,6 +96,13 @@ def print_results(chosen_door, fake_door, win_door):
 	"\nChosen door: " + str(chosen_door) +
 	"\nDid we win: " + str(did_we_win) + "\n")
 
+def print_door_graphics():
+
+
+	print("----    ----    ----")
+	print("|WW|    |LL|    |LL|")
+	print("----    ----    ----")
+
 ##########
 #MAIN LOOP
 ##########
@@ -115,6 +124,8 @@ while keep_playing == True:
 	choice_print(chosen_door, fake_door)
 
 	did_we_win = run(chosen_door, fake_door, win_door)
+
+	print_door_graphics()
 
 	print_results(chosen_door, fake_door, win_door)	
 
