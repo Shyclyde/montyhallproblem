@@ -1,8 +1,24 @@
 from __future__ import division
 import random
 
-CHOOSE_TO_SWITCH = True
-iterations = 10000
+print("\nLet's generate some Monty Hall games!")
+while True:
+	CHOOSE_TO_SWITCH = input("Do we always want to switch or stay: ")
+	if CHOOSE_TO_SWITCH == "switch":
+		CHOOSE_TO_SWITCH = True
+		break
+	elif CHOOSE_TO_SWITCH == "stay":
+		CHOOSE_TO_SWITCH = False
+		break
+	print("Not a valid entry, type 'switch' or 'stay' to continue.")
+
+while True:
+	iterations = input("How many random games should we generate: ")
+	try:
+		iterations = int(iterations)
+		break
+	except:
+		print("Not a valid number, try again")
 
 #storing the outcomes here, 1 is a win, 0 is a loss
 outcomes = []
