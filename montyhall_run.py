@@ -1,9 +1,7 @@
 from __future__ import division
 import random
 
-print("\nLet's generate some Monty Hall games!")
 
-#ask for switch/stay, error check
 def ask_for_switch():
 	while True:
 		chose_to_switch = input("Do we always want to switch or stay: ")
@@ -15,7 +13,7 @@ def ask_for_switch():
 			return chose_to_switch
 		print("Not a valid entry, type 'switch' or 'stay' to continue.")
 
-#ask for how many iterations, error check
+
 def ask_for_iterations():	
 	while True:
 		iterations = input("How many random games should we generate: ")
@@ -25,7 +23,7 @@ def ask_for_iterations():
 		except:
 			print("Not a valid number, try again")
 
-#start the game
+
 def play_game(chose_to_switch):
 		print("-")
 
@@ -54,14 +52,17 @@ def play_game(chose_to_switch):
 
 		return chosen_door == win_door
 
-#calulate and print the results
+
 def print_statistics(win_count, run_count):
 	print(f"\nTotal wins: {win_count} out of {run_count}")
 	print (f"We won {round(win_count / run_count * 100, 2)}% of the time.")
 
-run_count = ask_for_iterations()
-switch = ask_for_switch()
-win_count = 0
-for i in range(run_count):
-	win_count += int(play_game(switch))
-print_statistics(win_count, run_count)
+
+if __name__ == "__main__":
+    print("Let's generate some Monty Hall games!")
+    run_count = ask_for_iterations()
+    switch = ask_for_switch()
+    win_count = 0
+    for i in range(run_count):
+        win_count += int(play_game(switch))
+    print_statistics(win_count, run_count)
