@@ -1,0 +1,7 @@
+# Python environment
+.venv
+__pycache__
+.mypy_cache
+
+# VSCode environment
+.vscode/
